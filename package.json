@@ -1,0 +1,33 @@
+{
+  "name": "howto-webpack-commonschunkplugin",
+  "version": "0.0.0",
+  "description": "A how to guide on using webpack CommonsChunkPlugin",
+  "main": "webpack.no-splitting.js",
+  "scripts": {
+    "build-base": "webpack --config=./webpack.config.js",
+    "build-commonschunk": "webpack --config=./webpack.commonschunk.js",
+    "serve-base": "webpack-dev-server --inline --content-base=./dist/ --open ./webpack.config.js",
+    "serve-commonschunk": "webpack-dev-server --inline --content-base=./dist/ --open ./webpack.commonschunk.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnorrish/howto-webpack-CommonsChunkPlugin.git"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "matt@mnorrish.co.nz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mnorrish/howto-webpack-CommonsChunkPlugin/issues"
+  },
+  "homepage": "https://github.com/mnorrish/howto-webpack-CommonsChunkPlugin#readme",
+  "dependencies": {
+    "babel-core": "6.10.4",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.9.0",
+    "html-webpack-plugin": "2.22.0",
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1"
+  }
+}
