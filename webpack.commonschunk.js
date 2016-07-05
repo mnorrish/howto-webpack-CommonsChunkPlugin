@@ -4,17 +4,19 @@ const config = require('./webpack.config');
 
 module.exports = Object.assign({}, config, {
 
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'entry',
-            children: true,
-            minChunks: 2
-        }),
+  plugins: [
+    // move shared dependencies into the entry chunk
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'entry',
+      children: true,
+      minChunks: 2,
+    }),
 
-        new HtmlWebpackPlugin({
-          title: 'webpack with CommonsChunkPlugin',
-          template: 'index.ejs'
-        })
-    ]
+    // inject entry script into HTML file
+    new HtmlWebpackPlugin({
+      title: 'webpack with CommonsChunkPlugin',
+      template: 'index.ejs',
+    }),
+  ],
 
 });

@@ -3,27 +3,32 @@ require('./dependency3').doSomething();
 
 // application route logic
 function router(routeName, element) {
-
   // Below we use require.ensure to define split points in the applcation
 
   if (routeName === 'a') {
     // the routeA module is only loaded when needed
-    return require.ensure(['./routeA'], function(require) {
+    require.ensure(['./routeA'], (require) => {
       // the code inside this callback is only executed once the routeA module is loaded
       require('./routeA')(element);
     }, 'routeA'); // the final argument gives the chunk a name -- otherwise a number is used
+
+    return;
   }
 
   if (routeName === 'b') {
-    return require.ensure(['./routeB'], function(require) {
+    require.ensure(['./routeB'], (require) => {
       require('./routeB')(element);
     }, 'routeB');
+
+    return;
   }
 
   if (routeName === 'c') {
-    return require.ensure(['./routeC'], function(require) {
+    require.ensure(['./routeC'], (require) => {
       require('./routeC')(element);
     }, 'routeC');
+
+    return;
   }
 }
 
