@@ -98,3 +98,41 @@ require.ensure(
 For an examples of code splitting in a routing situation see [source/app.js](source/app.js)
 
 For more detail on code splitting with webpack see http://webpack.github.io/docs/code-splitting.html#defining-a-split-point
+
+## Extracting shared dependencies
+
+The webpack CommonsChunkPlugin is used by adding an instance of `webpack.optimize.CommonsChunkPlugin` to the `plugins` array in webpack configuration. Plugin options can be given to the constructor.
+
+```javascript
+// webpack configuration
+
+const webpack = require("webpack");
+
+module.exports = {
+  entry: {
+    entry: './app.js'
+  },
+
+  output: {
+    ...
+  },
+
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      // name of the entry chunk to scan for common (shared) dependencies
+      // the common dependencies will be moved into this entry chunk
+      name: 'entry',
+
+      // indicate that we want to scan for common dependencies in
+      // child (code split) chunks of the named entry chunk
+      children: true,
+
+      // minimum number of different chunks (entry or split) which a dependency
+      // must be used by to deem it a common dependency
+      minChunks: 2
+    })
+  ]
+};
+```
+
+For more detail on CommonsChunkPlugin configuration options see http://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
