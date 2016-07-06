@@ -73,3 +73,28 @@ routeC.js
 ```
 
 In this example, `dependency1` is moved into the `entry` chunk because all routes depend on it. `dependency3` is kept in `entry` chunk and removed from `routeC` to avoid duplication -- because the `entry` chunk will already be loaded before `routeC`.
+
+## Code splitting
+
+Code splitting points are defined with `require.ensure(dependencies, callback, chunkName)`.
+The optional `chunkName` gives the resulting chunk -- otherwise a number is used by default.
+
+```javascript
+require.ensure(
+  ['a', 'b'], // ensure that modules 'a' and 'b' are available
+  (require) => {
+    // the code inside this callback is only executed after modules 'a' and 'b' are loaded
+
+    // can now import and use modules 'a' and 'b'
+    const a = require('a');
+    const b = require('b');
+
+    doSomethingWith(a, b);
+  },
+  'some-chunk-name' // the name of the resulting chunk
+);
+```
+
+For an examples of code splitting in a routing situation see [source/app.js](source/app.js)
+
+For more detail on code splitting with webpack see http://webpack.github.io/docs/code-splitting.html#defining-a-split-point
